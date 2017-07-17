@@ -13,21 +13,9 @@ __pycache__/
 #media/
 #!media/iconimage/nophoto/
 #static/
-#static/scouty/images/
-#static/scouty/select2-4.0.1/
-#static/lp/img/
-#static/lp/fonts/
 media/temp/*.jpg
 *\#*
 lp/templates/bkp/
-
-# Elastic Beanstalk Files
-#.elasticbeanstalk/
-#.elasticbeanstalk/*
-#!.elasticbeanstalk/*.cfg.yml
-#!.elasticbeanstalk/*.global.yml
-.elasticbeanstalk/logs/
-.elasticbeanstalk/app_versions/
 
 
 *.sql
@@ -40,6 +28,3 @@ lp/templates/bkp/
 *.icloud
 
 *.psd
-
-docker/*/aws/credentials
-assets/*
