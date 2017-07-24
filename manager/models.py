@@ -22,9 +22,9 @@ class Person(models.Model):
     OKINAWA = 45
 
     # 名前
-    name = CharField(max_length=128)
+    name = models.CharField(max_length=128)
     # 誕生日
-    birthday = models.DatetimeField()
+    birthday = models.DateTimeField()
     # 性別
     sex = models.IntegerField(editable=False)
     # 出身地
@@ -55,18 +55,18 @@ class Manager(models.Model):
     # 部署
     department = models.IntegerField()
     # 着任時期
-    joined_at = models.DatetimeField()
+    joined_at = models.DateTimeField()
     # やめた時期
-    quited_at = models.DatetimeField(null=True, blank=True)
+    quited_at = models.DateTimeField(null=True, blank=True)
 
 
 class Worker(models.Model):
 
     # 人
-    person
+    person = models.ForeignKey('Person')
     # 着任時期
-    joined_at = models.DatetimeField()
+    joined_at = models.DateTimeField()
     # やめた時期
-    quited_at = models.DatetimeField(null=True, blank=True)
+    quited_at = models.DateTimeField(null=True, blank=True)
     # 担当上司
     manager = models.ForeignKey('Manager')

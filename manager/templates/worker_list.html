@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Worker List{% endblock %}
+{% load staticfiles %}
+
+      {% block body %}
+      <div id="wrapper">
+        <div id="page-wrapper">
+          <div class="row">
+            <div class="col-lg-6 full-width margin-top-20percent" >
+              <div class="panel panel-default full-width">
+
+                <div class="panel-heading">
+                  Edit Help
+                </div>
+
+                <div class="panel-body full-width full-height">
+                  <table id="worker-list-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline full-width">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>名前</th>
+                        <th>性別</th>
+                        <th>誕生日</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for worker in workers %}
+                      <tr>
+                        <td>{{worker.id}}</td>
+                        <td>{{worker.person.name}}</td>
+                        <td>{{worker.person.sex}}</td>
+                        <td>{{worker.person.birthday}}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function() {
+            $('#worker-list-table').DataTable({
+                responsive: true,
+                // sort機能の無効化
+                ordering: false,
+                // ページの表示件数を変更する
+                displayLength: 20,
+            });
+        });
+      </script>
+      {% endblock %}
