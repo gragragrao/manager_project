@@ -1,7 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+from manager.managers import PersonManager
 
 
-class Person(models.Model):
+class Person(AbstractBaseUser):
+    objects = PersonManager()
 
     MAN = 0
     WOMAN = 1
