@@ -10,7 +10,7 @@ class WorkerListView(TemplateView):
     def get(self, request, *args, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
 
-        workers = Worker.objects.all()
+        workers = Worker.objects.all().select_related('person')
         context['workers'] = workers
 
         return render(self.request, self.template_name, context)
