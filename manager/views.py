@@ -20,7 +20,7 @@ class CustomLoginView(TemplateView):
         username = self.request.POST['username']
         password = self.request.POST['password']
         user = authenticate(username=username, password=password)
-        if user is not None and user.is_active:
+        if user is not None:
             login(self.request, user)
             return redirect(self.get_next_redirect_url())
         else:
@@ -39,22 +39,19 @@ def person_registration(request, *args, **kwargs):
     if request.POST:
         form_data = request.POST
 
-        sex = User.MAN if form_data['sex'] == 'male' else User.WOMAN
+        sex = Person.MAN if form_data['sex'] == 'male' else Person.WOMAN
 
-        user = User(name=form_data['name'],
-                    birthday=form_data['birthday'],
-                    sex=sex,
-                    email=form_data['email'],
-                    address_from=form_data['address_from'],
-                    current_address=form_data['current_address'])
+        person = Person(
+            name=form_data['name'],
+            birthday=form_data['birthday'],
+            sex=sex,
+            email=form_data['email'],
+            address_from=form_data['address_from'],
+            current_address=form_data['current_address']
+        )
 
-        user.set_password(form_data['password'])
-        user.save()
-
-        # Activationを作成
-        activation = Activation(user=user)
-        activation.create_and_set_key()
-        activation.save()
+        person.set_password(form_data['password'])
+        person.save()
 
         return render(request, "registration_done.html", {"email": form_data['email']})
 
@@ -65,7 +62,7 @@ class WorkerListView(TemplateView):
     def get(self, request, *args, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
 
-        workers = Worker.objects.all().select_related('user')
+        workers = Worker.objects.all().select_related('person')
         context['workers'] = workers
 
         return render(self.request, self.template_name, context)

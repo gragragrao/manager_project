@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
-from manager.managers import UserManager
+from manager.managers import PersonManager
 
 
-class User(AbstractBaseUser):
-    objects = UserManager()
+class Person(AbstractBaseUser):
+    objects = PersonManager()
 
     MAN = 0
     WOMAN = 1
@@ -88,18 +88,8 @@ class User(AbstractBaseUser):
     current_address = models.IntegerField()
 
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'identifier'
-
-
-class Activation(models.Model):
-    user = models.ForeignKey('User', blank=False)
-    key = models.CharField(max_length=185, unique=True)
-    created_at = models.DateField(auto_now_add=True, null=True, blank=True)
-
-    def create_and_set_key(self):
-        self.key = uuid.uuid4().hex
 
 
 class Manager(models.Model):
@@ -118,7 +108,7 @@ class Manager(models.Model):
     DEP_IS = 50  # 情報システム
 
     # 人
-    user = models.ForeignKey('User')
+    person = models.ForeignKey('Person')
     # 部署
     department = models.IntegerField()
     # 着任時期
@@ -130,7 +120,7 @@ class Manager(models.Model):
 class Worker(models.Model):
 
     # 人
-    user = models.ForeignKey('User')
+    person = models.ForeignKey('Person')
     # 着任時期
     joined_at = models.DateTimeField()
     # やめた時期

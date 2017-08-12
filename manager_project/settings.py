@@ -178,4 +178,4 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'manager.User'
+AUTH_USER_MODEL = 'manager.Person'
