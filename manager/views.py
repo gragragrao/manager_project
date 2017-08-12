@@ -17,9 +17,9 @@ class CustomLoginView(TemplateView):
             return login(self.request, *args, **kwargs)
 
     def post(self, _, *args, **kwargs):
-        identifier = self.request.POST['identifier']
+        username = self.request.POST['username']
         password = self.request.POST['password']
-        user = authenticate(username=identifier, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(self.request, user)
             return redirect(self.get_next_redirect_url())
@@ -39,20 +39,20 @@ def person_registration(request, *args, **kwargs):
     if request.POST:
         form_data = request.POST
 
-        sex = Person.MAN if form_data['sex'] == 'male' else Person.WOMAN
+        sex = User.MAN if form_data['sex'] == 'male' else User.WOMAN
 
-        person = Person(name=form_data['name'],
-                        birthday=form_data['birthday'],
-                        sex=sex,
-                        email=form_data['email'],
-                        address_from=form_data['address_from'],
-                        current_address=form_data['current_address'])
+        user = User(name=form_data['name'],
+                    birthday=form_data['birthday'],
+                    sex=sex,
+                    email=form_data['email'],
+                    address_from=form_data['address_from'],
+                    current_address=form_data['current_address'])
 
-        person.set_password(form_data['password'])
-        person.save()
+        user.set_password(form_data['password'])
+        user.save()
 
         # Activationを作成
-        activation = Activation(person=person)
+        activation = Activation(user=user)
         activation.create_and_set_key()
         activation.save()
 
@@ -65,7 +65,7 @@ class WorkerListView(TemplateView):
     def get(self, request, *args, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
 
-        workers = Worker.objects.all().select_related('person')
+        workers = Worker.objects.all().select_related('user')
         context['workers'] = workers
 
         return render(self.request, self.template_name, context)
