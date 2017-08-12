@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 from django.contrib.auth.views import login
 from django.contrib.auth import authenticate
+from django.contrib.auth import logout
 
 from manager.models import *
 
@@ -66,3 +67,8 @@ class WorkerListView(TemplateView):
         context['workers'] = workers
 
         return render(self.request, self.template_name, context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
