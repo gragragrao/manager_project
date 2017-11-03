@@ -191,6 +191,4 @@ HIJACK_LOGIN_REDIRECT_URL = '/worker_list/'
 HIJACK_LOGOUT_REDIRECT_URL = '/worker_list/'
 HIJACK_ALLOW_GET_REQUESTS = True
 
-HIJACK_URL_ALLOWED_ATTRIBUTES = ('user_id', 'email', 'username', 'identifier')
-
 HIJACK_USE_BOOTSTRAP = True
