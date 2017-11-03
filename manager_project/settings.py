@@ -179,3 +179,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'manager.Person'
+
+# LOGIN_REDIRECT_URL
+LOGIN_REDIRECT_URL = '/worker_list/'
+LOGIN_URL = '/login/'
