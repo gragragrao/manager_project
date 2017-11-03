@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% load staticfiles %}
+    {% load hijack_tags %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,8 @@
     <meta name="author" content="">
 
     <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'hijack/hijack-styles.css' %}" />
 
     <link href="{% static 'bootstrap/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
@@ -35,6 +38,7 @@
     <![endif]-->
   </head>
   <body>
+    {% hijack_notification %}
     <div id="wrapper">
       <nav class="navbar navbar-default navbar-static-top manager-nav no-margin" role="navigation">
         <div class="navbar-header">

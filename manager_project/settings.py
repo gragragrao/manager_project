@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'manager',
+    'hijack',
+    'compat',
 ]
 
 MIDDLEWARE = [
@@ -183,3 +185,10 @@ AUTH_USER_MODEL = 'manager.Person'
 # LOGIN_REDIRECT_URL
 LOGIN_REDIRECT_URL = '/worker_list/'
 LOGIN_URL = '/login/'
+
+# hijack
+HIJACK_LOGIN_REDIRECT_URL = '/worker_list/'
+HIJACK_LOGOUT_REDIRECT_URL = '/worker_list/'
+HIJACK_ALLOW_GET_REQUESTS = True
+
+HIJACK_USE_BOOTSTRAP = True
